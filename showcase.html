@@ -1,0 +1,175 @@
+<!DOCTYPE html>
+<html lang="fa" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>ویترین تینکو</title>
+<link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>🎬</text></svg>">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Vazirmatn:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<div class="site-loader" id="siteLoader"><img src="assets/logo.png" alt="تینکو"></div>
+<header>
+  <div class="nav">
+    <a class="logo" href="index.html" style="text-decoration:none;"><img src="assets/logo.png" alt="تینکو"></a>
+    <nav class="navlinks">
+      <div class="nav-dropdown">
+        <span class="nav-dropdown-trigger">دوره‌های آموزشی <i>▾</i></span>
+        <div class="nav-dropdown-menu">
+          <a href="courses/students.html">دوره‌های دانش‌آموزی</a>
+          <a href="courses/mentors.html">دوره‌های آموزشی مربی‌گری</a>
+        </div>
+      </div>
+      <a href="showcase.html">ویترین تینکو</a>
+      <a href="index.html#about">درباره ما</a>
+      <a href="contact.html">تماس</a>
+    </nav>
+    <a class="btn btn-ghost" href="https://tinco.leco.ir" target="_blank" rel="noopener">ورود به کلاس</a>
+    <a class="btn btn-primary" href="register.html">ثبت‌نام</a>
+  </div>
+</header>
+
+<main class="wrap" style="padding-top:50px; padding-bottom:80px;">
+
+  <section class="contact-hero">
+    <h1>ویترین تینکو</h1>
+    <p>خبر رشته‌های جدید و ویدیوهای معرفی هر دوره، همه‌جا یه‌جا.</p>
+  </section>
+
+  <section style="padding-top:30px;">
+    <div class="section-head">
+      <h2>اطلاع‌رسانی</h2>
+      <p>تازه‌ترین خبرها</p>
+    </div>
+    <div id="announceList"></div>
+  </section>
+
+  <section style="padding-top:20px;">
+    <div class="section-head">
+      <h2>ویدیوهای معرفی رشته‌ها</h2>
+      <p>روی هر رشته بزن، ویدیوش پخش می‌شه</p>
+    </div>
+    <div class="grid" id="videoGrid"></div>
+  </section>
+
+</main>
+
+<!-- Video modal -->
+<div class="video-overlay" id="videoOverlay">
+  <div class="video-modal">
+    <button class="checkout-close" id="videoClose" aria-label="بستن">×</button>
+    <h3 id="videoTitle"></h3>
+    <div class="video-frame" id="videoFrame"></div>
+  </div>
+</div>
+
+<footer>
+  <div class="wrap foot-row">
+    <div>© ۱۴۰۴ تینکو — آکادمی آموزش آنلاین</div>
+    <div><a href="https://instagram.com/tinco_ir" target="_blank" rel="noopener" style="color:inherit;">اینستاگرام: @tinco_ir</a> · تماس: ۰۲۱-۰۰۰۰۰۰۰</div>
+  </div>
+</footer>
+
+<script>
+  // ---- اطلاع‌رسانی‌ها: هر بار خواستی خبر جدید بذاری، یه آیتم به همین آرایه اضافه کن ----
+  const announcements = [
+    {
+      icon: "📣",
+      title: "به ویترین تینکو خوش اومدی",
+      text: "از این به بعد، خبر رشته‌های جدید و اتفاقات تینکو رو همین‌جا اعلام می‌کنیم.",
+      date: "شهریور ۱۴۰۴"
+    }
+  ];
+
+  const announceList = document.getElementById('announceList');
+  announcements.forEach(a => {
+    const el = document.createElement('div');
+    el.className = 'announce-card';
+    el.innerHTML = `
+      <div class="announce-icon">${a.icon}</div>
+      <div>
+        <h3>${a.title}</h3>
+        <p>${a.text}</p>
+        <span class="announce-date">${a.date}</span>
+      </div>`;
+    announceList.appendChild(el);
+  });
+
+  // ---- ویدیوهای رشته‌ها: وقتی ویدیوی هر رشته رو داشتی، لینکش رو اینجا توی videoUrl بذار ----
+  // videoUrl می‌تونه لینک embed آپارات/یوتیوب باشه، یا مسیر یه فایل mp4
+  const courseVideos = [
+    { icon:"🤖", title:"لکوروبو", videoUrl:null },
+    { icon:"🔧", title:"لکوروبو پیشرفته", videoUrl:null },
+    { icon:"💻", title:"لکوپای", videoUrl:"assets/videos/lecopy.mp4", thumb:"assets/images/lecopy-thumb.jpg" },
+    { icon:"🧮", title:"لکو مس", videoUrl:null },
+    { icon:"🎮", title:"لکو هایتک", videoUrl:null },
+    { icon:"🌐", title:"لکوAI", videoUrl:null },
+    { icon:"🧸", title:"لکوکیدز", videoUrl:null },
+    { icon:"🔤", title:"لکوایفان", videoUrl:null },
+    { icon:"🔌", title:"لکو الک", videoUrl:null },
+    { icon:"✨", title:"لکو مجیک", videoUrl:null },
+    { icon:"🧠", title:"لکو سام", videoUrl:null }
+  ];
+
+  const videoGrid = document.getElementById('videoGrid');
+  const overlay = document.getElementById('videoOverlay');
+  const videoTitle = document.getElementById('videoTitle');
+  const videoFrame = document.getElementById('videoFrame');
+
+  function isEmbeddable(url) {
+    return /youtube\.com|youtu\.be|aparat\.com/.test(url);
+  }
+  function toEmbedUrl(url) {
+    const yt = url.match(/(?:youtu\.be\/|youtube\.com.*(?:\?v=|\/embed\/))([\w-]+)/);
+    if (yt) return `https://www.youtube.com/embed/${yt[1]}`;
+    return url; // آپارات و بقیه رو همون‌طور می‌ذاریم (لینک embed خودشون رو بده)
+  }
+
+  function openVideo(item) {
+    videoTitle.textContent = item.title;
+    videoFrame.innerHTML = "";
+    if (!item.videoUrl) {
+      videoFrame.innerHTML = `<div class="video-empty">ویدیوی این رشته هنوز اضافه نشده. لینکش رو بده تا وصلش کنیم.</div>`;
+    } else if (item.videoUrl.endsWith('.mp4')) {
+      videoFrame.innerHTML = `<video src="${item.videoUrl}" controls autoplay></video>`;
+    } else if (isEmbeddable(item.videoUrl)) {
+      videoFrame.innerHTML = `<iframe src="${toEmbedUrl(item.videoUrl)}" allow="autoplay; fullscreen" allowfullscreen></iframe>`;
+    } else {
+      videoFrame.innerHTML = `<div class="video-empty">این لینک قابل پخش داخل صفحه نیست. <a href="${item.videoUrl}" target="_blank" rel="noopener">اینجا بازش کن</a>.</div>`;
+    }
+    overlay.classList.add('open');
+  }
+
+  courseVideos.forEach(item => {
+    const el = document.createElement('div');
+    el.className = 'card video-card';
+    const thumbStyle = item.thumb
+      ? `background-image:linear-gradient(0deg, rgba(0,0,0,.25), rgba(0,0,0,.05)), url('${item.thumb}'); background-size:cover; background-position:center;`
+      : '';
+    el.innerHTML = `
+      <div class="video-thumb" style="${thumbStyle}"><div class="video-play">▶</div></div>
+      <h3>${item.icon} ${item.title}</h3>`;
+    el.addEventListener('click', () => openVideo(item));
+    videoGrid.appendChild(el);
+  });
+
+  document.getElementById('videoClose').addEventListener('click', () => overlay.classList.remove('open'));
+  overlay.addEventListener('click', (e) => { if (e.target === overlay) overlay.classList.remove('open'); });
+</script>
+
+<script>
+  window.addEventListener('load', function () {
+    var loader = document.getElementById('siteLoader');
+    if (!loader) return;
+    setTimeout(function () {
+      loader.classList.add('hide');
+      setTimeout(function () { loader.remove(); }, 550);
+    }, 500);
+  });
+</script>
+</body>
+</html>

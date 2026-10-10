@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang="fa" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>تماس با ما — تینکو</title>
+<link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>🧭</text></svg>">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Vazirmatn:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<div class="site-loader" id="siteLoader"><img src="assets/logo.png" alt="تینکو"></div>
+<header>
+  <div class="nav">
+    <a class="logo" href="index.html" style="text-decoration:none;"><img src="assets/logo.png" alt="تینکو"></a>
+    <nav class="navlinks">
+      <div class="nav-dropdown">
+        <span class="nav-dropdown-trigger">دوره‌های آموزشی <i>▾</i></span>
+        <div class="nav-dropdown-menu">
+          <a href="courses/students.html">دوره‌های دانش‌آموزی</a>
+          <a href="courses/mentors.html">دوره‌های آموزشی مربی‌گری</a>
+        </div>
+      </div>
+      <a href="showcase.html">ویترین تینکو</a>
+      <a href="index.html#about">درباره ما</a>
+      <a href="contact.html">تماس</a>
+    </nav>
+    <a class="btn btn-ghost" href="https://tinco.leco.ir" target="_blank" rel="noopener">ورود به کلاس</a>
+    <a class="btn btn-primary" href="register.html">ثبت‌نام</a>
+  </div>
+</header>
+
+<main class="wrap">
+
+  <section class="contact-hero">
+    <h1>تماس با ما</h1>
+    <p>می‌تونی با دفتر مرکزی تینکو یا مستقیم با آموزشگاه شهر خودت در تماس باشی.</p>
+  </section>
+
+  <section class="office-section">
+    <div class="office-phones">
+      <div class="phone-row">
+        <div class="phone-icon">☎️</div>
+        <div>
+          <p class="phone-label">شماره ۱ — دفتر مرکزی</p>
+          <p class="phone-value placeholder-text">شماره تماس</p>
+        </div>
+      </div>
+      <div class="phone-row">
+        <div class="phone-icon">☎️</div>
+        <div>
+          <p class="phone-label">شماره ۲ — دفتر مرکزی</p>
+          <p class="phone-value placeholder-text">شماره تماس</p>
+        </div>
+      </div>
+      <div class="phone-row">
+        <div class="phone-icon">☎️</div>
+        <div>
+          <p class="phone-label">شماره ۳ — دفتر مرکزی</p>
+          <p class="phone-value placeholder-text">شماره تماس</p>
+        </div>
+      </div>
+    </div>
+    <div class="office-image">
+      <span>🏢</span>
+      <span>تصویر دفتر مرکزی</span>
+    </div>
+  </section>
+
+  <section class="branches-head section-head">
+    <h2>آموزشگاه‌های تینکو در سراسر ایران</h2>
+    <p>برای هماهنگی، با کارشناس شهر خودت تماس بگیر</p>
+  </section>
+
+  <div class="branch-grid" id="branchGrid"></div>
+
+</main>
+
+<footer>
+  <div class="wrap foot-row">
+    <div>© ۱۴۰۴ تینکو — آکادمی آموزش آنلاین</div>
+    <div><a href="https://instagram.com/tinco_ir" target="_blank" rel="noopener" style="color:inherit;">اینستاگرام: @tinco_ir</a> · تماس: ۰۲۱-۰۰۰۰۰۰۰</div>
+  </div>
+</footer>
+
+<script>
+  const branches = [
+    "تینکو تهران", "تینکو ساری", "تینکو سبلان",
+    "تینکو رضوی", "تینکو مکران", "تینکو فرح‌آباد",
+    "تینکو باران", "تینکو ساحل", "تینکو هیرکان"
+  ];
+
+  const grid = document.getElementById('branchGrid');
+  branches.forEach(name => {
+    const el = document.createElement('div');
+    el.className = 'card branch-card';
+    el.innerHTML = `
+      <div class="branch-avatar">👤</div>
+      <h3>${name}</h3>
+      <p class="branch-row">👤 <span class="placeholder-text">نام کارشناس</span></p>
+      <p class="branch-row">📞 <span class="placeholder-text">شماره تماس</span></p>
+      <p class="branch-row">📍 <span class="placeholder-text">آدرس آموزشگاه</span></p>`;
+    grid.appendChild(el);
+  });
+
+  // subtle 3D tilt to match the rest of the site
+  document.querySelectorAll('.card').forEach(card => {
+    card.addEventListener('mousemove', (e) => {
+      const r = card.getBoundingClientRect();
+      const x = (e.clientX - r.left) / r.width - 0.5;
+      const y = (e.clientY - r.top) / r.height - 0.5;
+      card.style.transform = `translateY(-6px) perspective(600px) rotateX(${(-y * 8).toFixed(2)}deg) rotateY(${(x * 8).toFixed(2)}deg)`;
+    });
+    card.addEventListener('mouseleave', () => { card.style.transform = ''; });
+  });
+</script>
+
+<script>
+  window.addEventListener('load', function () {
+    var loader = document.getElementById('siteLoader');
+    if (!loader) return;
+    setTimeout(function () {
+      loader.classList.add('hide');
+      setTimeout(function () { loader.remove(); }, 550);
+    }, 500);
+  });
+</script>
+</body>
+</html>

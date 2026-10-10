@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html lang="fa" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>دوره‌های دانش‌آموزی — تینکو</title>
+<link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>🧭</text></svg>">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Vazirmatn:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../style.css">
+</head>
+<body>
+
+<div class="site-loader" id="siteLoader"><img src="../assets/logo.png" alt="تینکو"></div>
+<header>
+  <div class="nav">
+    <a class="logo" href="../index.html" style="text-decoration:none;"><img src="../assets/logo.png" alt="تینکو"></a>
+    <nav class="navlinks">
+      <div class="nav-dropdown">
+        <span class="nav-dropdown-trigger">دوره‌های آموزشی <i>▾</i></span>
+        <div class="nav-dropdown-menu">
+          <a href="students.html">دوره‌های دانش‌آموزی</a>
+          <a href="mentors.html">دوره‌های آموزشی مربی‌گری</a>
+        </div>
+      </div>
+      <a href="../showcase.html">ویترین تینکو</a>
+      <a href="../index.html#about">درباره ما</a>
+      <a href="../contact.html">تماس</a>
+    </nav>
+    <a class="btn btn-ghost" href="https://tinco.leco.ir" target="_blank" rel="noopener">ورود به کلاس</a>
+    <a class="btn btn-primary" href="../register.html">ثبت‌نام</a>
+  </div>
+</header>
+
+<main class="wrap" style="padding-top:50px; padding-bottom:70px;">
+  <a class="breadcrumb" href="../index.html">← بازگشت به صفحه‌ی اصلی</a>
+
+  <div class="section-head" style="margin-top:20px;">
+    <h2>دوره‌های دانش‌آموزی</h2>
+    <p>مناسب کودکان و نوجوانان</p>
+  </div>
+
+  <div class="grid" id="courseGrid"></div>
+</main>
+
+<footer>
+  <div class="wrap foot-row">
+    <div>© ۱۴۰۴ تینکو — آکادمی آموزش آنلاین</div>
+    <div><a href="https://instagram.com/tinco_ir" target="_blank" rel="noopener" style="color:inherit;">اینستاگرام: @tinco_ir</a> · تماس: ۰۲۱-۰۰۰۰۰۰۰</div>
+  </div>
+</footer>
+
+<script>
+  function termRange(prefix, start, end) {
+    const fa = ['۰','۱','۲','۳','۴','۵','۶','۷','۸','۹'];
+    const toFa = n => String(n).split('').map(d => fa[d]).join('');
+    const arr = [];
+    for (let i = start; i <= end; i++) arr.push({ value: String(i), label: `${prefix} ${toFa(i)}` });
+    return arr;
+  }
+
+  const courses = [
+    { slug:"lecorobo", icon:"🤖", title:"لکوروبو", desc:"دوره‌ی رباتیک تینکو، در ۵ ران آموزشی پشت‌سرهم.", lvl:"مبتدی تا پیشرفته", cnt:"۵ ران",
+      terms: termRange("ران", 1, 5) },
+    { slug:"lecopy", icon:"💻", title:"لکوپای", desc:"برنامه‌نویسی پایتون، در ۴ ترم پشت‌سرهم.", lvl:"مبتدی تا متوسط", cnt:"۴ ترم",
+      terms: termRange("ترم", 1, 4) },
+    { slug:"lecomas", icon:"🧮", title:"لکو مس", desc:"چرتکه و محاسبات ذهنی، از ترم بیسیک تا ترم ۱۲.", lvl:"کودکان تا نوجوانان", cnt:"۱۳ ترم",
+      terms: [{ value:"basic", label:"ترم بیسیک" }, ...termRange("ترم", 1, 12)] },
+    { slug:"lecohightech", icon:"🎮", title:"لکو هایتک", desc:"برنامه‌نویسی اسکرچ و ساخت بازی، در ۴ ترم.", lvl:"مبتدی", cnt:"۴ ترم",
+      terms: termRange("ترم", 1, 4) },
+    { slug:"lecorobo-advanced", icon:"🔧", title:"لکوروبو پیشرفته", desc:"سنسورها، موتورها و کنترل هوشمند ربات.", lvl:"پیشرفته", cnt:"۲۸ جلسه",
+      terms: null },
+    { slug:"lecoai", icon:"🌐", title:"لکوAI", desc:"آشنایی ساده و کاربردی با هوش مصنوعی، در ۲ ترم.", lvl:"متوسط", cnt:"۲ ترم",
+      terms: termRange("ترم", 1, 2) },
+    { slug:"lecokids", icon:"🧸", title:"لکوکیدز", desc:"رباتیک برای کودکان ۵ تا ۷ سال، در ۴ ترم.", lvl:"۵ تا ۷ سال", cnt:"۴ ترم",
+      terms: termRange("ترم", 1, 4) },
+    { slug:"lecoefun", icon:"🔤", title:"لکوایفان", desc:"آموزش زبان انگلیسی با بازی و سرگرمی، در ۸ ترم.", lvl:"زبان انگلیسی", cnt:"۸ ترم",
+      terms: termRange("ترم", 1, 8) },
+    { slug:"lecoelec", icon:"🔌", title:"لکو الک", desc:"آموزش الکترونیک برای نوجوانان ۱۲ سال به بالا.", lvl:"۱۲ سال به بالا", cnt:"۴ ترم",
+      terms: termRange("ترم", 1, 4) },
+    { slug:"lecomagic", icon:"✨", title:"لکو مجیک", desc:"آموزش الکترونیک به‌شکل بازی، برای زیر ۱۲ سال.", lvl:"زیر ۱۲ سال", cnt:"۲ ترم",
+      terms: termRange("ترم", 1, 2) },
+    { slug:"lecosam", icon:"🧠", title:"لکو سام", desc:"تکنیک‌های محاسبات سریع، مخصوص کنکوری‌ها.", lvl:"۱۰ سال به بالا", cnt:"۴ ترم",
+      terms: termRange("ترم", 1, 4) }
+  ];
+
+  const grid = document.getElementById('courseGrid');
+  courses.forEach(c => {
+    if (c.terms) {
+      // card with a term/round dropdown before going in
+      const optionsHTML = c.terms.map(t => `<option value="${t.value}">${t.label}</option>`).join('');
+      const el = document.createElement('div');
+      el.className = 'card';
+      el.innerHTML = `
+        <div class="card-icon">${c.icon}</div>
+        <h3>${c.title}</h3>
+        <p>${c.desc}</p>
+        <select class="term-select" style="width:100%; margin:12px 0; padding:10px 12px; border-radius:8px; border:1px solid var(--line); background:var(--bg); color:var(--ink); font-family:'Vazirmatn',sans-serif; font-size:13.5px;">
+          ${optionsHTML}
+        </select>
+        <a class="btn btn-primary" style="width:100%; text-align:center; display:block;" data-goto>مشاهده‌ی این ترم</a>`;
+      const link = el.querySelector('[data-goto]');
+      const select = el.querySelector('.term-select');
+      link.addEventListener('click', () => {
+        window.location.href = `../pages/${c.slug}.html?term=${select.value}`;
+      });
+      grid.appendChild(el);
+      return;
+    }
+    // plain card, no dropdown
+    const el = document.createElement('a');
+    el.className = 'card';
+    el.href = `../pages/${c.slug}.html`;
+    el.innerHTML = `
+      <div class="card-icon">${c.icon}</div>
+      <h3>${c.title}</h3>
+      <p>${c.desc}</p>
+      <div class="card-meta"><span class="lvl">${c.lvl}</span><span class="cnt">${c.cnt}</span></div>`;
+    grid.appendChild(el);
+  });
+
+  // 3D tilt like the homepage cards
+  document.querySelectorAll('.card').forEach(card => {
+    card.addEventListener('mousemove', (e) => {
+      const r = card.getBoundingClientRect();
+      const x = (e.clientX - r.left) / r.width - 0.5;
+      const y = (e.clientY - r.top) / r.height - 0.5;
+      card.style.transform = `translateY(-6px) perspective(600px) rotateX(${(-y * 8).toFixed(2)}deg) rotateY(${(x * 8).toFixed(2)}deg)`;
+    });
+    card.addEventListener('mouseleave', () => { card.style.transform = ''; });
+  });
+</script>
+
+<script>
+  window.addEventListener('load', function () {
+    var loader = document.getElementById('siteLoader');
+    if (!loader) return;
+    setTimeout(function () {
+      loader.classList.add('hide');
+      setTimeout(function () { loader.remove(); }, 550);
+    }, 500);
+  });
+</script>
+</body>
+</html>

@@ -1,0 +1,186 @@
+<!DOCTYPE html>
+<html lang="fa" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>ثبت‌نام — تینکو</title>
+<link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>🧭</text></svg>">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Vazirmatn:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="style.css">
+<style>
+  .register-wrap { max-width:460px; margin:0 auto; padding:70px 28px 90px; }
+  .register-card { background:var(--card); border:1px solid var(--line); border-radius:20px; padding:34px 28px; }
+  .register-card h1 { font-size:24px; margin:0 0 8px; }
+  .register-card > p { color:var(--ink-soft); font-size:14.5px; margin:0 0 28px; }
+  .field { margin-bottom:18px; }
+  .field label { display:block; font-size:13.5px; font-weight:600; margin-bottom:8px; }
+  .field input { width:100%; padding:13px 14px; border-radius:10px; border:1px solid var(--line); background:var(--bg); color:var(--ink); font-family:'Vazirmatn',sans-serif; font-size:14.5px; }
+  .field input:focus { outline:none; border-color:var(--blue); }
+  .field small { display:block; color:var(--ink-soft); font-size:12px; margin-top:6px; }
+  .submit-btn { width:100%; padding:14px; font-size:15px; margin-top:8px; }
+  .success-box { display:none; text-align:center; padding:10px 4px; }
+  .success-box .tick { width:56px; height:56px; border-radius:50%; background:var(--blue-pale); display:flex; align-items:center; justify-content:center; font-size:26px; margin:0 auto 16px; }
+  .success-box h2 { font-size:19px; margin:0 0 8px; }
+  .success-box p { color:var(--ink-soft); font-size:14px; }
+  .note { margin-top:18px; font-size:12px; color:var(--ink-soft); background:var(--blue-pale); border-radius:10px; padding:10px 12px; }
+</style>
+</head>
+<body>
+
+<div class="site-loader" id="siteLoader"><img src="assets/logo.png" alt="تینکو"></div>
+<header>
+  <div class="nav">
+    <a class="logo" href="index.html" style="text-decoration:none;"><img src="assets/logo.png" alt="تینکو"></a>
+    <nav class="navlinks">
+      <div class="nav-dropdown">
+      <span class="nav-dropdown-trigger">دوره‌های آموزشی <i>▾</i></span>
+      <div class="nav-dropdown-menu">
+        <a href="courses/students.html">دوره‌های دانش‌آموزی</a>
+        <a href="courses/mentors.html">دوره‌های آموزشی مربی‌گری</a>
+      </div>
+    </div>
+      <a href="showcase.html">ویترین تینکو</a>
+      <a href="index.html#about">درباره ما</a>
+      <a href="contact.html">تماس</a>
+    </nav>
+    <a class="btn btn-ghost" href="https://tinco.leco.ir" target="_blank" rel="noopener">ورود به کلاس</a>
+    <a class="btn btn-ghost" href="index.html">بازگشت به سایت</a>
+  </div>
+</header>
+
+<main class="register-wrap">
+  <div class="register-card">
+
+    <div id="formView">
+      <h1>ثبت‌نام در تینکو</h1>
+      <p>برای شروع، اطلاعات زیر رو وارد کن. بعد از ثبت‌نام باهات تماس می‌گیریم.</p>
+
+      <form id="registerForm">
+        <div class="field">
+          <label for="firstName">نام</label>
+          <input type="text" id="firstName" name="firstName" required placeholder="مثلاً علی">
+        </div>
+        <div class="field">
+          <label for="lastName">نام خانوادگی</label>
+          <input type="text" id="lastName" name="lastName" required placeholder="مثلاً رضایی">
+        </div>
+        <div class="field">
+          <label for="phone">شماره تماس</label>
+          <input type="tel" id="phone" name="phone" required placeholder="09xxxxxxxxx" pattern="09[0-9]{9}" inputmode="numeric">
+          <small>شماره باید با ۰۹ شروع بشه و ۱۱ رقم باشه.</small>
+        </div>
+        <div class="field">
+          <label for="city">شهر / شعبه</label>
+          <select id="city" name="city" required style="width:100%; padding:13px 14px; border-radius:10px; border:1px solid var(--line); background:var(--bg); color:var(--ink); font-family:'Vazirmatn',sans-serif; font-size:14.5px;">
+            <option value="" disabled selected>شعبه‌ات رو انتخاب کن</option>
+            <option value="تینکو تهران">تینکو تهران</option>
+            <option value="تینکو ساری">تینکو ساری</option>
+            <option value="تینکو سبلان">تینکو سبلان</option>
+            <option value="تینکو رضوی">تینکو رضوی</option>
+            <option value="تینکو مکران">تینکو مکران</option>
+            <option value="تینکو فرح‌آباد">تینکو فرح‌آباد</option>
+            <option value="تینکو باران">تینکو باران</option>
+            <option value="تینکو ساحل">تینکو ساحل</option>
+            <option value="تینکو هیرکان">تینکو هیرکان</option>
+          </select>
+        </div>
+        <div class="field">
+          <label for="courseName">رشته‌ی مورد نظر</label>
+          <select id="courseName" name="courseName" required style="width:100%; padding:13px 14px; border-radius:10px; border:1px solid var(--line); background:var(--bg); color:var(--ink); font-family:'Vazirmatn',sans-serif; font-size:14.5px;">
+            <option value="" disabled selected>رشته رو انتخاب کن</option>
+            <option value="لکوروبو">لکوروبو</option>
+            <option value="لکوروبو پیشرفته">لکوروبو پیشرفته</option>
+            <option value="لکوپای">لکوپای</option>
+            <option value="لکو مس">لکو مس</option>
+            <option value="لکو هایتک">لکو هایتک</option>
+            <option value="لکوAI">لکوAI</option>
+            <option value="لکوکیدز">لکوکیدز</option>
+            <option value="لکوایفان">لکوایفان</option>
+            <option value="لکو الک">لکو الک</option>
+            <option value="لکو مجیک">لکو مجیک</option>
+            <option value="لکو سام">لکو سام</option>
+          </select>
+        </div>
+        <button type="submit" class="btn btn-primary submit-btn">ثبت‌نام</button>
+      </form>
+
+      <p class="note">فعلاً ارسال پیامک خوش‌آمدگویی به این شماره وصل نیست — این بخش بعداً به یه سرویس پیامکی متصل می‌شه.</p>
+    </div>
+
+    <div class="success-box" id="successView">
+      <div class="tick">✓</div>
+      <h2>خوش اومدی به خانواده‌ی بزرگ تینکو!</h2>
+      <p>ثبت‌نامت با موفقیت انجام شد. به‌زودی باهات تماس می‌گیریم.</p>
+      <a class="btn btn-ghost" href="index.html" style="margin-top:20px; display:inline-block;">بازگشت به صفحه‌ی اصلی</a>
+    </div>
+
+  </div>
+</main>
+
+<footer>
+  <div class="wrap foot-row">
+    <div>© ۱۴۰۴ تینکو — آکادمی آموزش آنلاین</div>
+    <div><a href="https://instagram.com/tinco_ir" target="_blank" rel="noopener" style="color:inherit;">اینستاگرام: @tinco_ir</a> · تماس: ۰۲۱-۰۰۰۰۰۰۰</div>
+  </div>
+</footer>
+
+<script>
+  const WEB3FORMS_ACCESS_KEY = "e8df25ef-4e85-4274-ba25-46b88523ab01";
+
+  const form = document.getElementById('registerForm');
+  const submitBtn = form.querySelector('.submit-btn');
+
+  form.addEventListener('submit', async function (e) {
+    e.preventDefault();
+
+    const data = {
+      access_key: WEB3FORMS_ACCESS_KEY,
+      subject: "ثبت‌نام جدید در تینکو",
+      "نام": document.getElementById('firstName').value.trim(),
+      "نام خانوادگی": document.getElementById('lastName').value.trim(),
+      "شماره تماس": document.getElementById('phone').value.trim(),
+      "شهر / شعبه": document.getElementById('city').value,
+      "رشته‌ی مورد نظر": document.getElementById('courseName').value
+    };
+
+    submitBtn.disabled = true;
+    submitBtn.textContent = "در حال ارسال...";
+
+    try {
+      const res = await fetch("https://api.web3forms.com/submit", {
+        method: "POST",
+        headers: { "Content-Type": "application/json", "Accept": "application/json" },
+        body: JSON.stringify(data)
+      });
+      const result = await res.json();
+
+      if (result.success) {
+        document.getElementById('formView').style.display = 'none';
+        document.getElementById('successView').style.display = 'block';
+      } else {
+        alert("مشکلی توی ارسال پیش اومد، دوباره تلاش کن.");
+        submitBtn.disabled = false;
+        submitBtn.textContent = "ثبت‌نام";
+      }
+    } catch (err) {
+      alert("مشکلی توی ارسال پیش اومد، اتصال اینترنتت رو چک کن.");
+      submitBtn.disabled = false;
+      submitBtn.textContent = "ثبت‌نام";
+    }
+  });
+</script>
+
+<script>
+  window.addEventListener('load', function () {
+    var loader = document.getElementById('siteLoader');
+    if (!loader) return;
+    setTimeout(function () {
+      loader.classList.add('hide');
+      setTimeout(function () { loader.remove(); }, 550);
+    }, 500);
+  });
+</script>
+</body>
+</html>

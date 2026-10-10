@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="fa" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>لکوروبو پیشرفته — تینکو</title>
+<link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>🔧</text></svg>">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Vazirmatn:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../style.css">
+</head>
+<body>
+
+<div class="site-loader" id="siteLoader"><img src="../assets/logo.png" alt="تینکو"></div>
+<header>
+  <div class="nav">
+    <a class="logo" href="../index.html" style="text-decoration:none;"><img src="../assets/logo.png" alt="تینکو"></a>
+    <nav class="navlinks">
+      <div class="nav-dropdown">
+        <span class="nav-dropdown-trigger">دوره‌های آموزشی <i>▾</i></span>
+        <div class="nav-dropdown-menu">
+          <a href="../courses/students.html">دوره‌های دانش‌آموزی</a>
+          <a href="../courses/mentors.html">دوره‌های آموزشی مربی‌گری</a>
+        </div>
+      </div>
+      <a href="../showcase.html">ویترین تینکو</a>
+      <a href="../index.html#about">درباره ما</a>
+      <a href="../contact.html">تماس</a>
+    </nav>
+    <a class="btn btn-ghost" href="https://tinco.leco.ir" target="_blank" rel="noopener">ورود به کلاس</a>
+    <a class="btn btn-primary" href="../register.html">ثبت‌نام</a>
+  </div>
+</header>
+
+<main class="wrap">
+  <a class="breadcrumb" href="../courses/students.html">← بازگشت به همه‌ی دوره‌ها</a>
+
+  <section class="detail-hero">
+    <div>
+      <span class="detail-badge">پیشرفته</span>
+      <h1>لکوروبو پیشرفته</h1>
+      <p class="lede">سنسورها، موتورها و کنترل هوشمند ربات، برای کسانی که دوره‌ی لکوروبو رو گذرونده‌اند.</p>
+      <div class="detail-meta">
+        <div><b>۲۸</b>جلسه</div>
+        <div><b>۱۰ هفته</b>مدت دوره</div>
+        <div><b>۱۳+</b>بازه‌ی سنی</div>
+      </div>
+<a class="btn btn-primary" href="../register.html" id="enroll">ثبت‌نام در دوره</a>
+    </div>
+    <div class="illustration">
+      <svg viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg">
+        <g fill="none" stroke="var(--blue)" stroke-width="5">
+          <circle cx="85" cy="90" r="34"/>
+          <circle cx="140" cy="130" r="22"/>
+        </g>
+        <circle cx="85" cy="90" r="10" fill="var(--blue-deep)"/>
+        <circle cx="140" cy="130" r="7" fill="var(--blue-deep)"/>
+        <g stroke="var(--blue)" stroke-width="5" stroke-linecap="round">
+          <line x1="85" y1="48" x2="85" y2="58"/><line x1="85" y1="122" x2="85" y2="132"/>
+          <line x1="43" y1="90" x2="53" y2="90"/><line x1="117" y1="90" x2="127" y2="90"/>
+        </g>
+      </svg>
+    </div>
+  </section>
+
+  <section class="detail-body">
+    <div>
+      <h2>درباره‌ی لکوروبو پیشرفته</h2>
+      <p>لکوروبو پیشرفته ادامه‌ی مسیر لکوروبوعه و وارد مفاهیم پیچیده‌تر مثل کنترل چند موتور همزمان، سنسورهای پیشرفته و برنامه‌نویسی متنی برای رفتار هوشمند ربات می‌شه.</p>
+      <h2>سرفصل‌ها</h2>
+      <ul class="curriculum">
+          <li>مرور سریع مبانی و آماده‌سازی</li>
+          <li>سنسورهای فاصله، نور و صدا</li>
+          <li>کنترل هم‌زمان چند موتور</li>
+          <li>برنامه‌نویسی متنی رفتار ربات</li>
+          <li>پروژه‌ی پایانی: ربات هوشمند خودکار</li>
+      </ul>
+    </div>
+    <aside class="side-card">
+      <h3>این دوره برای کیه؟</h3>
+      <p>مناسب کسانی که دوره‌ی لکوروبو رو گذرونده‌اند و می‌خوان عمیق‌تر برن.</p>
+      <a class="btn btn-primary" href="../register.html">شروع یادگیری</a>
+    </aside>
+  </section>
+</main>
+
+<footer>
+  <div class="wrap foot-row">
+    <div>© ۱۴۰۴ تینکو — آکادمی آموزش آنلاین</div>
+    <div><a href="https://instagram.com/tinco_ir" target="_blank" rel="noopener" style="color:inherit;">اینستاگرام: @tinco_ir</a> · تماس: ۰۲۱-۰۰۰۰۰۰۰</div>
+  </div>
+</footer>
+
+<script>
+  window.addEventListener('load', function () {
+    var loader = document.getElementById('siteLoader');
+    if (!loader) return;
+    setTimeout(function () {
+      loader.classList.add('hide');
+      setTimeout(function () { loader.remove(); }, 550);
+    }, 500);
+  });
+</script>
+</body>
+</html>

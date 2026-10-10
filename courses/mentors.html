@@ -1,0 +1,271 @@
+<!DOCTYPE html>
+<html lang="fa" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>دوره‌های آموزشی مربی‌گری — تینکو</title>
+<link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>🎓</text></svg>">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Vazirmatn:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../style.css">
+</head>
+<body>
+
+<div class="site-loader" id="siteLoader"><img src="../assets/logo.png" alt="تینکو"></div>
+<header>
+  <div class="nav">
+    <a class="logo" href="../index.html" style="text-decoration:none;"><img src="../assets/logo.png" alt="تینکو"></a>
+    <nav class="navlinks">
+      <div class="nav-dropdown">
+        <span class="nav-dropdown-trigger">دوره‌های آموزشی <i>▾</i></span>
+        <div class="nav-dropdown-menu">
+          <a href="students.html">دوره‌های دانش‌آموزی</a>
+          <a href="mentors.html">دوره‌های آموزشی مربی‌گری</a>
+        </div>
+      </div>
+      <a href="../showcase.html">ویترین تینکو</a>
+      <a href="../index.html#about">درباره ما</a>
+      <a href="../contact.html">تماس</a>
+    </nav>
+    <a class="btn btn-ghost" href="https://tinco.leco.ir" target="_blank" rel="noopener">ورود به کلاس</a>
+    <a class="btn btn-primary" href="../register.html">ثبت‌نام</a>
+  </div>
+</header>
+
+<main class="wrap" style="padding-top:50px; padding-bottom:80px;">
+  <a class="breadcrumb" href="../index.html">← بازگشت به صفحه‌ی اصلی</a>
+
+  <div class="section-head" style="margin-top:20px;">
+    <h2>لیست قیمت دوره‌ها — شهریور</h2>
+    <p>قیمت سایت، به تومان</p>
+  </div>
+
+  <div class="grid" id="priceGrid"></div>
+</main>
+
+<!-- Checkout modal: collects buyer info before (eventually) going to the payment gateway -->
+<div class="checkout-overlay" id="checkoutOverlay">
+  <div class="checkout-modal">
+    <button class="checkout-close" id="checkoutClose" aria-label="بستن">×</button>
+
+    <div id="checkoutFormView">
+      <h3>تکمیل خرید</h3>
+      <p class="checkout-course-line" id="checkoutCourseLine"></p>
+
+      <form id="checkoutForm">
+        <div class="field">
+          <label for="coFirstName">نام</label>
+          <input type="text" id="coFirstName" required placeholder="مثلاً علی">
+        </div>
+        <div class="field">
+          <label for="coLastName">نام خانوادگی</label>
+          <input type="text" id="coLastName" required placeholder="مثلاً رضایی">
+        </div>
+        <div class="field">
+          <label for="coPhone">شماره تماس</label>
+          <input type="tel" id="coPhone" required placeholder="09xxxxxxxxx" pattern="09[0-9]{9}" inputmode="numeric">
+        </div>
+        <button type="submit" class="btn btn-primary submit-btn">ادامه به پرداخت</button>
+      </form>
+      <p class="note">درگاه پرداخت هنوز وصل نشده — بعد از ثبت اطلاعاتت، همکارامون برای تکمیل پرداخت باهات تماس می‌گیرن.</p>
+    </div>
+
+    <div class="success-box" id="checkoutSuccessView" style="display:none;">
+      <div class="tick">✓</div>
+      <h2>اطلاعاتت ثبت شد!</h2>
+      <p>به‌زودی برای تکمیل پرداخت باهات تماس می‌گیریم.</p>
+      <button class="btn btn-ghost" id="checkoutDone" style="margin-top:20px;">بستن</button>
+    </div>
+  </div>
+</div>
+
+<footer>
+  <div class="wrap foot-row">
+    <div>© ۱۴۰۴ تینکو — آکادمی آموزش آنلاین</div>
+    <div><a href="https://instagram.com/tinco_ir" target="_blank" rel="noopener" style="color:inherit;">اینستاگرام: @tinco_ir</a> · تماس: ۰۲۱-۰۰۰۰۰۰۰</div>
+  </div>
+</footer>
+
+<script>
+    const priceItems = [
+    { title:"لکوروبو ران 1", variants:[{ label:"۳۰ روزه", price:2378376 }, { label:"۹۰ روزه", price:3872666 }] },
+    { title:"لکوروبو ران 2", variants:[{ label:"۳۰ روزه", price:3227796 }, { label:"۹۰ روزه", price:4076490 }] },
+    { title:"لکوروبو ران 3", variants:[{ label:"۳۰ روزه", price:3227796 }, { label:"۹۰ روزه", price:4077216 }] },
+    { title:"لکوروبو ران 4", variants:[{ label:"۳۰ روزه", price:3227796 }, { label:"۹۰ روزه", price:4841694 }] },
+    { title:"لکوروبو ران 5", variants:[{ label:"۳۰ روزه", price:4142338 }, { label:"۹۰ روزه", price:6213507 }] },
+    { title:"لکومس بیسیک 1 و 2", variants:[{ label:"۳۰ روزه", price:3083395 }, { label:"۹۰ روزه", price:5378208 }] },
+    { title:"لکومس 3 و 4", variants:[{ label:"۳۰ روزه", price:3166638 }, { label:"۹۰ روزه", price:4510638 }] },
+    { title:"لکوسام 1", variants:[{ label:"۳۰ روزه", price:2582237 }, { label:"۹۰ روزه", price:4135296 }] },
+    { title:"لکوسام 2", variants:[{ label:"۳۰ روزه", price:3805402 }, { label:"۹۰ روزه", price:5421042 }] },
+    { title:"لکوایفان 1 و 2", variants:[{ label:"۳۰ روزه", price:3550576 }, { label:"۹۰ روزه", price:4260691 }] },
+    { title:"لکوکیدز 1 و 2", variants:[{ label:"۳۰ روزه", price:4303728 }, { label:"۹۰ روزه", price:5165853 }] },
+    { title:"لکو الک 1 و 2", variants:[{ label:"۳۰ روزه", price:4915310 }, { label:"۹۰ روزه", price:6401795 }] },
+    { title:"لکو دومینو 1و2", variants:[{ label:"۳۰ روزه", price:1642212 }, { label:"۹۰ روزه", price:2582927 }] },
+    { title:"لکولب 1 و 2", variants:[{ label:"۳۰ روزه", price:4045504 }, { label:"۹۰ روزه", price:5765892 }] },
+    { title:"لکوپل 1و2", variants:[{ label:"۳۰ روزه", price:4169236 }, { label:"۹۰ روزه", price:5003774 }] },
+    { title:"لکوکیوب 1و2", variants:[{ label:"۳۰ روزه", price:3114540 }, { label:"۹۰ روزه", price:4671810 }] },
+    { title:"مزرعه فکر", variants:[{ label:"۳۰ روزه", price:4680304 }, { label:"۹۰ روزه", price:5617607 }] },
+    { title:"اسکرچ 1و2", variants:[{ label:"۳۰ روزه", price:4841694 }, { label:"۹۰ روزه", price:5810033 }] },
+    { title:"لکوپاون بیسیک و 1 و 2", variants:[{ label:"۳۰ روزه", price:3954900 }, { label:"۹۰ روزه", price:5634849 }] },
+    { title:"لکوروبو هوشمند 1", variants:[{ label:null, price:3656753 }] },
+    { title:"لکوروبو هوشمند 2", variants:[{ label:null, price:4685684 }] },
+    { title:"لکوروبو هوشمند 3", variants:[{ label:null, price:4932299 }] },
+    { title:"لکوروبو هوشمند 4", variants:[{ label:null, price:5425529 }] },
+    { title:"لکو ای آی", variants:[{ label:null, price:5000325 }] },
+    { title:"لکومس 5 و 6", variants:[{ label:null, price:2824322 }] },
+    { title:"لکومس 7 و 8", variants:[{ label:null, price:3261773 }] },
+    { title:"لکومس 9 و 10", variants:[{ label:null, price:3299997 }] },
+    { title:"لکومس 11 و 12", variants:[{ label:null, price:5917626 }] },
+    { title:"تحلیل کارنامه", variants:[{ label:null, price:840926 }] },
+    { title:"لکوسام 3", variants:[{ label:null, price:4734101 }] },
+    { title:"لکوسام 4", variants:[{ label:null, price:4734101 }] },
+    { title:"لکوایفان 3 و 4", variants:[{ label:null, price:3550576 }] },
+    { title:"لکوایفان 5 و 6", variants:[{ label:null, price:3227796 }] },
+    { title:"لکوایفان 7 و 8", variants:[{ label:null, price:3227796 }] },
+    { title:"لکوکیدز 3 و 4", variants:[{ label:null, price:3873355 }] },
+    { title:"لکو الک 3 و 4 (آموزش پروتئوس)", variants:[{ label:null, price:5336623 }] },
+    { title:"لکوفلای(پرستو)", variants:[{ label:null, price:1642212 }] },
+    { title:"اسکرچ 3 و 4", variants:[{ label:null, price:4841694 }] },
+    { title:"لکومجیک", variants:[{ label:null, price:4707203 }] },
+    { title:"آرتا انگلیسی 1", variants:[{ label:null, price:3227796 }] },
+    { title:"آرتا علوم 1", variants:[{ label:null, price:5379660 }] },
+    { title:"آرتا ریاضی 1", variants:[{ label:null, price:4518914 }] },
+    { title:"آزمون مربیگری", variants:[{ label:null, price:1960200 }] },
+    { title:"آزمون مربیگری مجدد", variants:[{ label:null, price:825000 }] },
+    { title:"لکوپای", variants:[{ label:null, price:6340950 }] },
+    { title:"لکوفیوچر", variants:[{ label:null, price:4491000 }] },
+    { title:"لکواپ", variants:[{ label:null, price:4841694 }] }
+  ];
+
+  const grid = document.getElementById('priceGrid');
+  priceItems.forEach(item => {
+    const hasVariants = item.variants.length > 1;
+    const firstPrice = item.variants[0].price.toLocaleString('fa-IR');
+    const el = document.createElement('div');
+    el.className = 'card';
+
+    if (hasVariants) {
+      const optionsHTML = item.variants.map((v, i) => `<option value="${i}">${v.label}</option>`).join('');
+      el.innerHTML = `
+        <div class="card-icon">🎓</div>
+        <h3>${item.title}</h3>
+        <select class="term-select variant-select" style="width:100%; margin:10px 0; padding:10px 12px; border-radius:8px; border:1px solid var(--line); background:var(--bg); color:var(--ink); font-family:'Vazirmatn',sans-serif; font-size:13.5px;">
+          ${optionsHTML}
+        </select>
+        <p class="price-cell variant-price" style="font-size:17px; margin:4px 0 10px;">${firstPrice} <small style="font-weight:400; color:var(--ink-soft); font-size:12.5px;">تومان</small></p>
+        <p style="font-size:11.5px; color:var(--ink-soft); line-height:1.6; margin:0 0 14px;">این دوره به‌صورت آفلاینه و به‌جای کلاس زنده، یه کد لایسنس براتون ارسال می‌شه.</p>
+        <button class="btn btn-primary buy-btn" style="width:100%; text-align:center; display:block;" data-name="${item.title}" data-price="${firstPrice}">خرید</button>`;
+
+      const select = el.querySelector('.variant-select');
+      const priceEl = el.querySelector('.variant-price');
+      const buyBtn = el.querySelector('.buy-btn');
+      select.addEventListener('change', () => {
+        const v = item.variants[select.value];
+        const priceText = v.price.toLocaleString('fa-IR');
+        priceEl.innerHTML = `${priceText} <small style="font-weight:400; color:var(--ink-soft); font-size:12.5px;">تومان</small>`;
+        buyBtn.dataset.price = priceText;
+        buyBtn.dataset.name = `${item.title} (${v.label})`;
+      });
+    } else {
+      el.innerHTML = `
+        <div class="card-icon">🎓</div>
+        <h3>${item.title}</h3>
+        <p class="price-cell" style="font-size:17px; margin:4px 0 16px;">${firstPrice} <small style="font-weight:400; color:var(--ink-soft); font-size:12.5px;">تومان</small></p>
+        <button class="btn btn-primary buy-btn" style="width:100%; text-align:center; display:block;" data-name="${item.title}" data-price="${firstPrice}">خرید</button>`;
+    }
+
+    grid.appendChild(el);
+  });
+
+  // subtle 3D tilt like the rest of the site
+  document.querySelectorAll('.card').forEach(card => {
+    card.addEventListener('mousemove', (e) => {
+      const r = card.getBoundingClientRect();
+      const x = (e.clientX - r.left) / r.width - 0.5;
+      const y = (e.clientY - r.top) / r.height - 0.5;
+      card.style.transform = `translateY(-6px) perspective(600px) rotateX(${(-y * 8).toFixed(2)}deg) rotateY(${(x * 8).toFixed(2)}deg)`;
+    });
+    card.addEventListener('mouseleave', () => { card.style.transform = ''; });
+  });
+
+  // ---- Checkout modal ----
+  const WEB3FORMS_ACCESS_KEY = "e8df25ef-4e85-4274-ba25-46b88523ab01";
+  const overlay = document.getElementById('checkoutOverlay');
+  const courseLine = document.getElementById('checkoutCourseLine');
+  const formView = document.getElementById('checkoutFormView');
+  const successView = document.getElementById('checkoutSuccessView');
+  const form = document.getElementById('checkoutForm');
+  const submitBtn = form.querySelector('.submit-btn');
+  let currentCourse = null;
+
+  grid.addEventListener('click', (e) => {
+    const btn = e.target.closest('.buy-btn');
+    if (!btn) return;
+    currentCourse = { name: btn.dataset.name, price: btn.dataset.price };
+    courseLine.textContent = `دوره: ${currentCourse.name} — ${currentCourse.price} تومان`;
+    formView.style.display = 'block';
+    successView.style.display = 'none';
+    form.reset();
+    submitBtn.disabled = false;
+    submitBtn.textContent = "ادامه به پرداخت";
+    overlay.classList.add('open');
+  });
+
+  function closeModal() { overlay.classList.remove('open'); }
+  document.getElementById('checkoutClose').addEventListener('click', closeModal);
+  document.getElementById('checkoutDone').addEventListener('click', closeModal);
+  overlay.addEventListener('click', (e) => { if (e.target === overlay) closeModal(); });
+
+  form.addEventListener('submit', async function (e) {
+    e.preventDefault();
+    submitBtn.disabled = true;
+    submitBtn.textContent = "در حال ثبت...";
+
+    const data = {
+      access_key: WEB3FORMS_ACCESS_KEY,
+      subject: "درخواست خرید دوره — تینکو",
+      "نام": document.getElementById('coFirstName').value.trim(),
+      "نام خانوادگی": document.getElementById('coLastName').value.trim(),
+      "شماره تماس": document.getElementById('coPhone').value.trim(),
+      "دوره": currentCourse ? currentCourse.name : "",
+      "قیمت": currentCourse ? currentCourse.price + " تومان" : ""
+    };
+
+    try {
+      const res = await fetch("https://api.web3forms.com/submit", {
+        method: "POST",
+        headers: { "Content-Type": "application/json", "Accept": "application/json" },
+        body: JSON.stringify(data)
+      });
+      const result = await res.json();
+      if (result.success) {
+        formView.style.display = 'none';
+        successView.style.display = 'block';
+        // نکته: وقتی درگاه پرداخت واقعی وصل شد، اینجا به‌جای نمایش پیام موفقیت
+        // باید کاربر به آدرس درگاه (مثلاً زرین‌پال) هدایت بشه.
+      } else {
+        alert("مشکلی توی ثبت اطلاعات پیش اومد، دوباره تلاش کن.");
+        submitBtn.disabled = false;
+        submitBtn.textContent = "ادامه به پرداخت";
+      }
+    } catch (err) {
+      alert("مشکلی توی ثبت اطلاعات پیش اومد، اتصال اینترنتت رو چک کن.");
+      submitBtn.disabled = false;
+      submitBtn.textContent = "ادامه به پرداخت";
+    }
+  });
+</script>
+
+<script>
+  window.addEventListener('load', function () {
+    var loader = document.getElementById('siteLoader');
+    if (!loader) return;
+    setTimeout(function () {
+      loader.classList.add('hide');
+      setTimeout(function () { loader.remove(); }, 550);
+    }, 500);
+  });
+</script>
+</body>
+</html>
